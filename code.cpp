@@ -20,7 +20,6 @@ struct inst{
 } ins[N];
 map<int,int> var;
 void excuse(int t,int line,int dig){
-//	cout<<t<<"/"<<dig<<" ";
 	inst now=ins[line];
 	if(now.type==0||dig<0)return;
 	if(now.type==1){
@@ -131,7 +130,7 @@ void input(){
 			cin>>ins[nI].arg1;
 			if(g)cout<<"VarB:";
 			cin>>ins[nI].arg2;
-			if(g)cout<<"Varres";
+			if(g)cout<<"Varres:";
 			cin>>ins[nI].arg3;
 		}
 		nI++;
