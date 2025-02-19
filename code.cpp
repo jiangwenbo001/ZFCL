@@ -33,10 +33,10 @@ void excuse(int t,int line,int dig){
 		excuse(t,line+1,dig);
 	}
 	if(now.type==3){
-		now.ifvar1=var[now.ifvar1];
-		now.ifvar2=var[now.ifvar2];
+		int ifvar1=var[now.ifvar1];
+		int ifvar2=var[now.ifvar2];
 		if(now.howif==1){
-			if(var[now.ifvar1]==var[now.ifvar2]){
+			if(var[ifvar1]==var[ifvar2]){
 				excuse(t,line+1,dig);
 			}
 			else{
@@ -44,7 +44,7 @@ void excuse(int t,int line,int dig){
 			}
 		}
 		if(now.howif==2){
-			if(var[now.ifvar1]!=var[now.ifvar2]){
+			if(var[ifvar1]!=var[ifvar2]){
 				excuse(t,line+1,dig);
 			}
 			else{
@@ -68,7 +68,7 @@ void excuse(int t,int line,int dig){
 			}
 		}
 		if(now.howif==5){
-			if(var[now.ifvar1]<var[now.ifvar2]){
+			if(var[ifvar1]<var[ifvar2]){
 				excuse(t,line+1,dig);
 			}
 			else{
@@ -76,7 +76,7 @@ void excuse(int t,int line,int dig){
 			}
 		}
 		if(now.howif==6){
-			if(var[now.ifvar1]<=var[now.ifvar2]){
+			if(var[ifvar1]<=var[ifvar2]){
 				excuse(t,line+1,dig);
 			}
 			else{
@@ -84,7 +84,7 @@ void excuse(int t,int line,int dig){
 			}
 		}
 		if(now.howif==7){
-			if(var[now.ifvar1]>var[now.ifvar2]){
+			if(var[ifvar1]>var[ifvar2]){
 				excuse(t,line+1,dig);
 			}
 			else{
@@ -92,7 +92,7 @@ void excuse(int t,int line,int dig){
 			}
 		}
 		if(now.howif==8){
-			if(var[now.ifvar1]>=var[now.ifvar2]){
+			if(var[ifvar1]>=var[ifvar2]){
 				excuse(t,line+1,dig);
 			}
 			else{
@@ -109,8 +109,8 @@ void excuse(int t,int line,int dig){
 				break;
 			}
 		}
-		now.supvar=var[now.supvar];
-		var[now.supvar]=x; 
+		int supvar=var[now.supvar];
+		var[supvar]=x; 
 		excuse(t,line+1,dig-x);
 	}
 	if(now.type==5){
@@ -118,11 +118,11 @@ void excuse(int t,int line,int dig){
 		excuse(t,line+1,dig);
 	}
 	if(now.type==6){
-		now.arg1=var[now.arg1];
-		now.arg2=var[now.arg2];
-		now.arg3=var[now.arg3];
-		if(now.calctype==1)var[now.arg3]=var[now.arg1]+var[now.arg2];
-		if(now.calctype==2)var[now.arg3]=var[now.arg1]-var[now.arg2];
+		int arg1=var[now.arg1];
+		int arg2=var[now.arg2];
+		int arg3=var[now.arg3];
+		if(now.calctype==1)var[arg3]=var[arg1]+var[arg2];
+		if(now.calctype==2)var[arg3]=var[arg1]-var[arg2];
 		excuse(t,line+1,dig);
 	}
 	if(now.type==7){
@@ -202,7 +202,7 @@ int main(){
 	system("pause");
 	for(int i=0;i<(1<<len);i++){
 		excuse(i,1,len);
-		cout<<endl;
+		cout<<var[1]<<endl;
 	} 
 	return 0;
 }
