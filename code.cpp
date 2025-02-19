@@ -29,10 +29,12 @@ void excuse(int t,int line,int dig){
 		excuse(t,line+1,dig);
 	}
 	if(now.type==2){
-		cout<<var[now.outputvar];
+		cout<<var[var[now.outputvar]];
 		excuse(t,line+1,dig);
 	}
 	if(now.type==3){
+		now.ifvar1=var[now.ifvar1];
+		now.ifvar2=var[now.ifvar2];
 		if(now.howif==1){
 			if(var[now.ifvar1]==var[now.ifvar2]){
 				excuse(t,line+1,dig);
@@ -107,6 +109,7 @@ void excuse(int t,int line,int dig){
 				break;
 			}
 		}
+		now.supvar=var[now.supvar];
 		var[now.supvar]=x; 
 		excuse(t,line+1,dig-x);
 	}
@@ -115,12 +118,19 @@ void excuse(int t,int line,int dig){
 		excuse(t,line+1,dig);
 	}
 	if(now.type==6){
+		now.arg1=var[now.arg1];
+		now.arg2=var[now.arg2];
+		now.arg3=var[now.arg3];
 		if(now.calctype==1)var[now.arg3]=var[now.arg1]+var[now.arg2];
 		if(now.calctype==2)var[now.arg3]=var[now.arg1]-var[now.arg2];
 		excuse(t,line+1,dig);
 	}
 	if(now.type==7){
 		var[now.eqvar1]=var[var[now.eqvar2]];
+		excuse(t,line+1,dig);
+	}
+	if(now.type==8){
+		var[var[now.setvar]]=now.setval;
 		excuse(t,line+1,dig);
 	}
 }
@@ -130,7 +140,7 @@ void input(){
 	cin>>g;
 	int nI=1;
 	while(true){
-		if(g)cout<<"insruction type[0:end 1:outputtext 2:outputvar 3:if 4:sup 5:set 6:calculate 7:copy]";
+		if(g)cout<<"insruction type[0:end 1:outputtext 2:outputvar 3:if 4:sup 5:set 6:calculate 7:copy 8:varset]";
 		cin>>ins[nI].type;
 		if(ins[nI].type==0)break;
 		if(ins[nI].type==1){
@@ -176,6 +186,12 @@ void input(){
 			cin>>ins[nI].eqvar1;
 			if(g)cout<<"VarB:";
 			cin>>ins[nI].eqvar2;
+		}
+		if(ins[nI].type==8){
+			if(g)cout<<"Setvar:";
+			cin>>ins[nI].setvar;
+			if(g)cout<<"Setval:";
+			cin>>ins[nI].setval;
 		}
 		nI++;
 	}
