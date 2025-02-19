@@ -63,6 +63,38 @@ void excuse(int t,int line,int dig){
 				excuse(t>>1,now.whereif,dig-1);
 			}
 		}
+		if(now.howif==5){
+			if(var[now.ifvar1]<var[now.ifvar2]){
+				excuse(t,line+1,dig);
+			}
+			else{
+				excuse(t,now.whereif,dig);
+			}
+		}
+		if(now.howif==6){
+			if(var[now.ifvar1]<=var[now.ifvar2]){
+				excuse(t,line+1,dig);
+			}
+			else{
+				excuse(t,now.whereif,dig);
+			}
+		}
+		if(now.howif==7){
+			if(var[now.ifvar1]>var[now.ifvar2]){
+				excuse(t,line+1,dig);
+			}
+			else{
+				excuse(t,now.whereif,dig);
+			}
+		}
+		if(now.howif==8){
+			if(var[now.ifvar1]>=var[now.ifvar2]){
+				excuse(t,line+1,dig);
+			}
+			else{
+				excuse(t,now.whereif,dig);
+			}
+		}
 	}
 	if(now.type==4){
 		int p=((1<<dig)-1)-t;
