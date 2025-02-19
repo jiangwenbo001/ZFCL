@@ -17,6 +17,8 @@ struct inst{
 	int arg1;
 	int arg2;
 	int arg3;
+	int eqvar1;
+	int eqvar2;
 } ins[N];
 map<int,int> var;
 void excuse(int t,int line,int dig){
@@ -117,6 +119,10 @@ void excuse(int t,int line,int dig){
 		if(now.calctype==2)var[now.arg3]=var[now.arg1]-var[now.arg2];
 		excuse(t,line+1,dig);
 	}
+	if(now.type==7){
+		var[now.eqvar1]=var[var[now.eqvar2]];
+		excuse(t,line+1,dig);
+	}
 }
 void input(){
 	cout<<"Do you want Guide?(0/1)";
@@ -124,7 +130,7 @@ void input(){
 	cin>>g;
 	int nI=1;
 	while(true){
-		if(g)cout<<"insruction type[0:end 1:outputtext 2:outputvar 3:if 4:sup 5:set 6:calculate]";
+		if(g)cout<<"insruction type[0:end 1:outputtext 2:outputvar 3:if 4:sup 5:set 6:calculate 7:copy]";
 		cin>>ins[nI].type;
 		if(ins[nI].type==0)break;
 		if(ins[nI].type==1){
@@ -164,6 +170,12 @@ void input(){
 			cin>>ins[nI].arg2;
 			if(g)cout<<"Varres:";
 			cin>>ins[nI].arg3;
+		}
+		if(ins[nI].type==7){
+			if(g)cout<<"VarA:";
+			cin>>ins[nI].eqvar1;
+			if(g)cout<<"VarB:";
+			cin>>ins[nI].eqvar2;
 		}
 		nI++;
 	}
